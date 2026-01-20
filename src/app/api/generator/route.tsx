@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
-import MonthTheme from "@/container/themes/Month";
+// import MonthTheme from "@/container/themes/Month";
 export const runtime = "edge";
+
 export async function GET(request: Request) {
   const now = new Date();
   const { searchParams } = new URL(request.url);
@@ -19,7 +20,7 @@ export async function GET(request: Request) {
   let ComponentToRender;
   switch (type) {
     case "month":
-      ComponentToRender = <MonthTheme {...data} />;
+      ComponentToRender = <></>;
       break;
     default:
       ComponentToRender = <></>;

@@ -6,18 +6,17 @@ import {
   Zap,
   Fingerprint,
 } from "lucide-react";
+import { BENTO_UI_WIDGET_TYPES } from "./constants";
 
 export const ITEMS = [
   {
-    id: "hero",
-    type: "hero",
-    title: "Lịch Tháng",
-    desc: "Theo dõi ngày tháng.",
+    id: BENTO_UI_WIDGET_TYPES.CALENDAR,
+    title: "bentoUI.calendar.title",
+    desc: 'bentoUI.calendar.subtitle',
     icon: <Calendar size={24} />,
     color: "orange",
-    href: "/editor/month",
-    colSpan: "col-span-2", // Desktop: 2 cột
-  },
+    href: "/editor/year",
+    colSpan: "col-span-2",},
   {
     id: "year",
     type: "tall",

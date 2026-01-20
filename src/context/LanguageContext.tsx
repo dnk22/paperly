@@ -5,7 +5,7 @@ import { dictionary, Locale } from "@/lib/dictionary";
 
 interface LanguageContextType {
   locale: Locale;
-  t: typeof dictionary.vi; // Tự động gợi ý code theo cấu trúc tiếng Việt
+  t: typeof dictionary.vi;
   toggleLanguage: () => void;
 }
 
@@ -14,13 +14,22 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
 );
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [locale, setLocale] = useState<Locale>("vi");
+  const [locale, setLocale] = useState<Locale>("en");
 
-  // Load ngôn ngữ đã lưu trong LocalStorage khi vào web
+  const [isMounted, setIsMounted] = useState(false);
+
   useEffect(() => {
     const saved = localStorage.getItem("app-locale") as Locale;
-    if (saved) setLocale(saved);
+    if (saved && (saved === "vi" || saved === "en")) {
+      setLocale(saved);
+    }
+
+    setIsMounted(true);
   }, []);
+
+  if (!isMounted) {
+    return <div className="min-h-screen bg-black" />;
+  }
 
   const toggleLanguage = () => {
     const newLocale = locale === "vi" ? "en" : "vi";
@@ -37,7 +46,6 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
-// Hook để dùng ở mọi nơi
 export function useLanguage() {
   const context = useContext(LanguageContext);
   if (!context)
