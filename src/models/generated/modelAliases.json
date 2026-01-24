@@ -1,0 +1,172 @@
+{
+  "iPhone Air": {
+    "model": "iPhone Air",
+    "profileKey": "420x912",
+    "scale": 3
+  },
+  "iPhone 17 Pro Max": {
+    "model": "iPhone 17 Pro Max",
+    "profileKey": "440x956",
+    "scale": 3
+  },
+  "iPhone 17 Pro": {
+    "model": "iPhone 17 Pro",
+    "profileKey": "402x874",
+    "scale": 3
+  },
+  "iPhone 17": {
+    "model": "iPhone 17",
+    "profileKey": "402x874",
+    "scale": 3
+  },
+  "iPhone 16e": {
+    "model": "iPhone 16e",
+    "profileKey": "390x844",
+    "scale": 3
+  },
+  "iPhone 16 Pro Max": {
+    "model": "iPhone 16 Pro Max",
+    "profileKey": "440x956",
+    "scale": 3
+  },
+  "iPhone 16 Pro": {
+    "model": "iPhone 16 Pro",
+    "profileKey": "402x874",
+    "scale": 3
+  },
+  "iPhone 16 Plus": {
+    "model": "iPhone 16 Plus",
+    "profileKey": "430x932",
+    "scale": 3
+  },
+  "iPhone 16": {
+    "model": "iPhone 16",
+    "profileKey": "393x852",
+    "scale": 3
+  },
+  "iPhone 15 Pro Max": {
+    "model": "iPhone 15 Pro Max",
+    "profileKey": "430x932",
+    "scale": 3
+  },
+  "iPhone 15 Pro": {
+    "model": "iPhone 15 Pro",
+    "profileKey": "393x852",
+    "scale": 3
+  },
+  "iPhone 15 Plus": {
+    "model": "iPhone 15 Plus",
+    "profileKey": "430x932",
+    "scale": 3
+  },
+  "iPhone 15": {
+    "model": "iPhone 15",
+    "profileKey": "393x852",
+    "scale": 3
+  },
+  "iPhone 14 Plus": {
+    "model": "iPhone 14 Plus",
+    "profileKey": "428x926",
+    "scale": 3
+  },
+  "iPhone 14 Pro Max": {
+    "model": "iPhone 14 Pro Max",
+    "profileKey": "430x932",
+    "scale": 3
+  },
+  "iPhone 14 Pro": {
+    "model": "iPhone 14 Pro",
+    "profileKey": "393x852",
+    "scale": 3
+  },
+  "iPhone 14": {
+    "model": "iPhone 14",
+    "profileKey": "390x844",
+    "scale": 3
+  },
+  "iPhone 13": {
+    "model": "iPhone 13",
+    "profileKey": "390x844",
+    "scale": 3
+  },
+  "iPhone 13 Pro Max": {
+    "model": "iPhone 13 Pro Max",
+    "profileKey": "428x926",
+    "scale": 3
+  },
+  "iPhone 13 Pro": {
+    "model": "iPhone 13 Pro",
+    "profileKey": "390x844",
+    "scale": 3
+  },
+  "iPhone 12": {
+    "model": "iPhone 12",
+    "profileKey": "390x844",
+    "scale": 3
+  },
+  "iPhone 12 Pro Max": {
+    "model": "iPhone 12 Pro Max",
+    "profileKey": "428x926",
+    "scale": 3
+  },
+  "iPhone 12 Pro": {
+    "model": "iPhone 12 Pro",
+    "profileKey": "390x844",
+    "scale": 3
+  },
+  "iPhone 11 Pro Max": {
+    "model": "iPhone 11 Pro Max",
+    "profileKey": "414x896",
+    "scale": 3
+  },
+  "iPhone 11 Pro": {
+    "model": "iPhone 11 Pro",
+    "profileKey": "375x812",
+    "scale": 3
+  },
+  "iPhone 11": {
+    "model": "iPhone 11",
+    "profileKey": "414x896",
+    "scale": 2
+  },
+  "iPhone XR": {
+    "model": "iPhone XR",
+    "profileKey": "414x896",
+    "scale": 2
+  },
+  "iPhone XS Max": {
+    "model": "iPhone XS Max",
+    "profileKey": "414x896",
+    "scale": 3
+  },
+  "iPhone XS": {
+    "model": "iPhone XS",
+    "profileKey": "375x812",
+    "scale": 3
+  },
+  "iPhone X": {
+    "model": "iPhone X",
+    "profileKey": "375x812",
+    "scale": 3
+  },
+  "iPhone 8 Plus": {
+    "model": "iPhone 8 Plus",
+    "profileKey": "414x736",
+    "scale": 3
+  },
+  "iPhone 7 Plus": {
+    "model": "iPhone 7 Plus",
+    "profileKey": "414x736",
+    "scale": 3
+  },
+  "iPhone 6s Plus": {
+    "model": "iPhone 6s Plus",
+    "profileKey": "414x736",
+    "scale": 3
+  },
+  "iPhone 6 Plus": {
+    "model": "iPhone 6 Plus",
+    "profileKey": "414x736",
+    "scale": 3
+  }
+}

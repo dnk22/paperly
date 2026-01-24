@@ -6,7 +6,7 @@ import { dictionary, Locale } from "@/lib/dictionary";
 interface LanguageContextType {
   locale: Locale;
   t: typeof dictionary.vi;
-  toggleLanguage: () => void;
+  toggleLanguage: (language?: Locale) => void;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(
@@ -31,8 +31,8 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     return <div className="min-h-screen bg-black" />;
   }
 
-  const toggleLanguage = () => {
-    const newLocale = locale === "vi" ? "en" : "vi";
+  const toggleLanguage = (language?: Locale) => {
+    const newLocale = language ? language : locale === "vi" ? "en" : "vi";
     setLocale(newLocale);
     localStorage.setItem("app-locale", newLocale);
   };

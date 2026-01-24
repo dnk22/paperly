@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 
-export default function useMediaQuery(query: string) {
+/**
+ * Hook to detect media query matches
+ * @param query - CSS media query string
+ * @returns boolean indicating if the query matches
+ */
+export default function useMediaQuery(query: string): boolean {
   const [matches, setMatches] = useState(false);
 
   useEffect(() => {

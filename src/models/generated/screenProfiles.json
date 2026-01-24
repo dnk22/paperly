@@ -1,0 +1,260 @@
+{
+  "420x912": {
+    "key": "420x912",
+    "logical": {
+      "width": 420,
+      "height": 912
+    },
+    "screenClass": "dynamic-island",
+    "safeZonePct": {
+      "top": 0.12,
+      "bottom": 0.08
+    },
+    "overlay": {
+      "statusBar": {
+        "heightPct": 0.06
+      },
+      "frame": {
+        "cornerRadiusPct": 0.06
+      },
+      "dynamicIsland": {
+        "widthPct": 0.28,
+        "heightPct": 0.035,
+        "topPct": 0.018,
+        "radiusPct": 0.02
+      }
+    }
+  },
+  "440x956": {
+    "key": "440x956",
+    "logical": {
+      "width": 440,
+      "height": 956
+    },
+    "screenClass": "dynamic-island",
+    "safeZonePct": {
+      "top": 0.12,
+      "bottom": 0.08
+    },
+    "overlay": {
+      "statusBar": {
+        "heightPct": 0.06
+      },
+      "frame": {
+        "cornerRadiusPct": 0.06
+      },
+      "dynamicIsland": {
+        "widthPct": 0.28,
+        "heightPct": 0.035,
+        "topPct": 0.018,
+        "radiusPct": 0.02
+      }
+    }
+  },
+  "402x874": {
+    "key": "402x874",
+    "logical": {
+      "width": 402,
+      "height": 874
+    },
+    "screenClass": "dynamic-island",
+    "safeZonePct": {
+      "top": 0.12,
+      "bottom": 0.08
+    },
+    "overlay": {
+      "statusBar": {
+        "heightPct": 0.06
+      },
+      "frame": {
+        "cornerRadiusPct": 0.06
+      },
+      "dynamicIsland": {
+        "widthPct": 0.28,
+        "heightPct": 0.035,
+        "topPct": 0.018,
+        "radiusPct": 0.02
+      }
+    }
+  },
+  "390x844": {
+    "key": "390x844",
+    "logical": {
+      "width": 390,
+      "height": 844
+    },
+    "screenClass": "notch",
+    "safeZonePct": {
+      "top": 0.1,
+      "bottom": 0.08
+    },
+    "overlay": {
+      "statusBar": {
+        "heightPct": 0.055
+      },
+      "frame": {
+        "cornerRadiusPct": 0.06
+      },
+      "notch": {
+        "widthPct": 0.45,
+        "heightPct": 0.045,
+        "topPct": 0.015,
+        "radiusPct": 0.02
+      }
+    }
+  },
+  "430x932": {
+    "key": "430x932",
+    "logical": {
+      "width": 430,
+      "height": 932
+    },
+    "screenClass": "dynamic-island",
+    "safeZonePct": {
+      "top": 0.12,
+      "bottom": 0.08
+    },
+    "overlay": {
+      "statusBar": {
+        "heightPct": 0.06
+      },
+      "frame": {
+        "cornerRadiusPct": 0.06
+      },
+      "dynamicIsland": {
+        "widthPct": 0.28,
+        "heightPct": 0.035,
+        "topPct": 0.018,
+        "radiusPct": 0.02
+      }
+    }
+  },
+  "393x852": {
+    "key": "393x852",
+    "logical": {
+      "width": 393,
+      "height": 852
+    },
+    "screenClass": "dynamic-island",
+    "safeZonePct": {
+      "top": 0.12,
+      "bottom": 0.08
+    },
+    "overlay": {
+      "statusBar": {
+        "heightPct": 0.06
+      },
+      "frame": {
+        "cornerRadiusPct": 0.06
+      },
+      "dynamicIsland": {
+        "widthPct": 0.28,
+        "heightPct": 0.035,
+        "topPct": 0.018,
+        "radiusPct": 0.02
+      }
+    }
+  },
+  "428x926": {
+    "key": "428x926",
+    "logical": {
+      "width": 428,
+      "height": 926
+    },
+    "screenClass": "dynamic-island",
+    "safeZonePct": {
+      "top": 0.12,
+      "bottom": 0.08
+    },
+    "overlay": {
+      "statusBar": {
+        "heightPct": 0.06
+      },
+      "frame": {
+        "cornerRadiusPct": 0.06
+      },
+      "dynamicIsland": {
+        "widthPct": 0.28,
+        "heightPct": 0.035,
+        "topPct": 0.018,
+        "radiusPct": 0.02
+      }
+    }
+  },
+  "414x896": {
+    "key": "414x896",
+    "logical": {
+      "width": 414,
+      "height": 896
+    },
+    "screenClass": "dynamic-island",
+    "safeZonePct": {
+      "top": 0.12,
+      "bottom": 0.08
+    },
+    "overlay": {
+      "statusBar": {
+        "heightPct": 0.06
+      },
+      "frame": {
+        "cornerRadiusPct": 0.06
+      },
+      "dynamicIsland": {
+        "widthPct": 0.28,
+        "heightPct": 0.035,
+        "topPct": 0.018,
+        "radiusPct": 0.02
+      }
+    },
+    "scaleVariants": [
+      2,
+      3
+    ]
+  },
+  "375x812": {
+    "key": "375x812",
+    "logical": {
+      "width": 375,
+      "height": 812
+    },
+    "screenClass": "notch",
+    "safeZonePct": {
+      "top": 0.1,
+      "bottom": 0.08
+    },
+    "overlay": {
+      "statusBar": {
+        "heightPct": 0.055
+      },
+      "frame": {
+        "cornerRadiusPct": 0.06
+      },
+      "notch": {
+        "widthPct": 0.45,
+        "heightPct": 0.045,
+        "topPct": 0.015,
+        "radiusPct": 0.02
+      }
+    }
+  },
+  "414x736": {
+    "key": "414x736",
+    "logical": {
+      "width": 414,
+      "height": 736
+    },
+    "screenClass": "classic",
+    "safeZonePct": {
+      "top": 0.06,
+      "bottom": 0.06
+    },
+    "overlay": {
+      "statusBar": {
+        "heightPct": 0.045
+      },
+      "frame": {
+        "cornerRadiusPct": 0.06
+      }
+    }
+  }
+}
