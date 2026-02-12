@@ -1,11 +1,3 @@
-export type WidgetType =
-  | "year"
-  | "month"
-  | "life"
-  | "routine"
-  | "vision"
-  | "identity";
-
 export interface GlobalConfig {
   theme: "light" | "dark" | "auto";
   backgroundColor: string;
@@ -16,7 +8,7 @@ export interface GlobalConfig {
     type: "hidden";
     color: string;
   };
-  islandColor: string;
+  islandBorderColor: string;
   leftWidgetColor: string;
   rightWidgetColor: string;
 }
@@ -61,7 +53,6 @@ export interface RoutineConfig {
 
 // Union Type cho Widget Data
 export type WidgetConfigData =
-  | { type: "date"; data: undefined }
   | { type: "month"; data: MonthConfig }
   | { type: "quarter"; data: undefined }
   | { type: "year"; data: YearConfig }

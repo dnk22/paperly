@@ -32,14 +32,6 @@ export async function getWebDeviceFingerprint(): Promise<DeviceFingerprint> {
       type: window.screen?.orientation?.type,
       angle: window.screen?.orientation?.angle,
     },
-
-    navigator: {
-      userAgent: navigator.userAgent,
-      platform: navigator.platform,
-      vendor: (navigator as any).vendor,
-      language: navigator.language,
-      languages: navigator.languages,
-    },
   };
   return fp;
 }

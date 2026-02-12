@@ -35,10 +35,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className="bg-black antialiased overflow-hidden">
+      <body className="bg-background antialiased overflow-hidden">
         <LanguageProvider>
           <Header />
-          <main className="bg-black scrollbar-modern overflow-y-auto h-[100vh]">
+          <main className="bg-background scrollbar-modern overflow-y-auto h-[100vh]">
             <div className="pt-20 pb-20">{children}</div>
             <Footer />
           </main>

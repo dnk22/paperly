@@ -43,7 +43,7 @@ export default function SpotlightCard({
         cursor-pointer
         group rounded-[32px]
         relative overflow-hidden 
-        bg-neutral-900 border border-neutral-800 p-6
+        bg-surface border border-neutral-800 p-6
         hover:border-neutral-700 transition-colors
         ${className}
       `}

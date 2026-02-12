@@ -7,7 +7,8 @@
   --color-brand-dim: #331800;
 
   /* Màu Nền & Chữ (Base) */
-  --color-background: #000000;
+  --color-background: #111111;
+  --color-surface: #161616;
   --color-foreground: #ffffff;
 
   --color-foreground-muted: #a3a3a3;
