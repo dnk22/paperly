@@ -5,6 +5,7 @@
   /* Màu Brand (Cam) */
   --color-brand: #ff4500;
   --color-brand-dim: #331800;
+  --color-primary: #3b82f6;
 
   /* Màu Nền & Chữ (Base) */
   --color-background: #111111;
@@ -13,6 +14,18 @@
 
   --color-foreground-muted: #a3a3a3;
   --color-foreground-dim: #525252;
+
+  /* Bảng màu UI Configurator */
+  --color-background-light: #f3f4f6;
+  --color-background-dark: #0f1115;
+  --color-surface-light: #ffffff;
+  --color-surface-dark: #1c1f26;
+  --color-border-light: #e5e7eb;
+  --color-border-dark: #2e333d;
+  --color-text-main-light: #111827;
+  --color-text-main-dark: #e5e7eb;
+  --color-text-muted-light: #6b7280;
+  --color-text-muted-dark: #9ca3af;
 
   /* Màu Card (Bento Grid) */
   --color-card: #0a0a0a;

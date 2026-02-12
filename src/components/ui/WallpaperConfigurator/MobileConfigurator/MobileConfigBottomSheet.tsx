@@ -79,7 +79,7 @@ export default function MobileConfigBottomSheet({
               - The preview behind will NOT scroll because it's in a separate layer
             */}
             <div className="flex-1 overflow-y-auto px-6 py-4 overscroll-contain touch-pan-y">
-              <ConfigPanel />
+              <ConfigPanel variant="embedded" />
             </div>
           </div>
         </Drawer.Content>

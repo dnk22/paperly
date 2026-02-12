@@ -45,8 +45,8 @@ export default function MobileCoverFlow() {
                     cursor-pointer relative h-[400px] rounded-[32px] p-6 flex flex-col justify-between border transition-all duration-300 ease-out
                     ${
                       isActive
-                        ? "bg-neutral-900 border-neutral-700 scale-100 opacity-100 shadow-2xl"
-                        : "bg-neutral-950 border-neutral-900 scale-90 opacity-40 blur-[1px]"
+                        ? "bg-surface-light dark:bg-surface-dark border-neutral-700 scale-100 opacity-100 shadow-2xl"
+                        : "bg-surface-dark dark:bg-surface-light border-neutral-900 scale-90 opacity-40 blur-[1px]"
                     }
                   `}
                 >
