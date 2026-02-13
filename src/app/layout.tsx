@@ -35,10 +35,12 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <link
-        href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
-        rel="stylesheet"
-      />
+      <head>
+        <link
+          href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
+          rel="stylesheet"
+        />
+      </head>
       <body className="bg-background antialiased overflow-hidden">
         <LanguageProvider>
           <Header />

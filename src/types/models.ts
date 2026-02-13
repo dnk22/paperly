@@ -39,7 +39,9 @@ export interface SafeZonePct {
 
 export interface StatusBarOverlaySpec {
   /** Height as a fraction of screen height (preview only). */
-  heightPct: number;
+  normalHeightPct: number;
+  notchHeightPct: number;
+  dynamicHeightPct: number;
 }
 
 export interface NotchOverlaySpec {

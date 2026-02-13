@@ -32,10 +32,8 @@ export const SUB_PRODUCT_TYPE = {
   SCHEMATIC: "SCHEMATIC",
 
   // ADD-ON
-  DOCK: "DOCK",
-  STATUS_BAR: "STATUS_BAR",
-  SHELF: "SHELF",
-};
+  ADD_ON: "ADD_ON",
+} as const;
 
 export interface ProductConfig {
   id: string;
@@ -219,44 +217,18 @@ export const PRODUCT_CONFIGS: ProductConfig[] = [
     },
   },
 
-  // ADD-ON
+  // // ADD-ON
   {
-    id: "dock",
-    type: SUB_PRODUCT_TYPE.DOCK,
+    id: "addOn",
+    type: SUB_PRODUCT_TYPE.ADD_ON,
     category: PRODUCT_TYPE.ADD_ON,
-    name: "Dock",
-    description: "App launcher bar",
+    name: "Add-On",
+    description: "Additional UI components",
     defaultConfig: {
       position: "bottom", // top, bottom, left, right
       apps: [],
       iconSize: 48,
       maxApps: 10,
-    },
-  },
-  {
-    id: "statusBar",
-    type: SUB_PRODUCT_TYPE.STATUS_BAR,
-    category: PRODUCT_TYPE.ADD_ON,
-    name: "Status Bar",
-    description: "Info display bar",
-    defaultConfig: {
-      position: "top",
-      widgets: [], // time, battery, wifi, etc
-      backgroundColor: "rgba(0,0,0,0.5)",
-      height: 32,
-    },
-  },
-  {
-    id: "shelf",
-    type: SUB_PRODUCT_TYPE.SHELF,
-    category: PRODUCT_TYPE.ADD_ON,
-    name: "Shelf",
-    description: "Widget organizer",
-    defaultConfig: {
-      layout: "grid",
-      columns: 4,
-      items: [],
-      expandable: true,
     },
   },
 ];
@@ -267,4 +239,26 @@ export const getProductsByCategory = (category: string) => {
 
 export const getProductConfig = (type: string) => {
   return PRODUCT_CONFIGS.find((product) => product.type === type);
+};
+
+export const STATUS_BAR_TYPES = {
+  notch: [
+    "X",
+    "XS",
+    "XS Max",
+    "XR",
+    "11",
+    "11 Pro",
+    "11 Pro Max",
+    "12",
+    "12 Pro",
+    "12 Pro Max",
+    "13",
+    "13 Pro",
+    "13 Pro Max",
+    "14",
+    "14 Plus",
+    "16e",
+  ],
+  normal: ["6 Plus", "6s Plus", "7 Plus", "8 Plus"],
 };

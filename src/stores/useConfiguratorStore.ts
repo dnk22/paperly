@@ -1,39 +1,9 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import type { DeviceFingerprint } from "@/types/deviceFingerprint";
-import type { AppConfig, GlobalConfig } from "@/types/config";
-import {
-  createDefaultAppConfig,
-  createDefaultWidgetConfig,
-  DEFAULT_DEVICE_MODEL,
-  DEFAULT_PRODUCT_TYPE,
-  getDefaultSubProduct,
-  getProductFromWidget,
-  resolveAutoDeviceModel,
-  resolveWidgetTypeFromSelection,
-  type DeviceModelId,
-  type ProductType,
-  type WidgetType,
-} from "@/components/ui/WallpaperConfigurator/configuration";
-
-interface AddOnConfig {
-  dock: boolean;
-  statusBar: boolean;
-  shelf: boolean;
-}
-
-/**
- * Configurator Store State
- */
-interface ConfiguratorState {
-  isOpen: boolean;
-  selectedWidget: string | null;
-  deviceInfo: DeviceFingerprint | null;
-  deviceModel: DeviceModelId;
-  productType: ProductType;
-  appConfig: AppConfig;
-  addOns: AddOnConfig;
-}
+import type { ConfiguratorState } from "@/types/config";
+import { SUB_PRODUCT_TYPE } from "@/utils/constants";
+import { createDefaultWidgetConfig } from "@/utils/helper";
 
 /**
  * Configurator Store Actions
@@ -41,172 +11,185 @@ interface ConfiguratorState {
 interface ConfiguratorActions {
   open: (widgetType?: string) => void;
   close: () => void;
-  toggle: () => void;
-  setWidget: (widgetType: string | null) => void;
   setDeviceInfo: (info: DeviceFingerprint) => void;
-  setDeviceModel: (model: DeviceModelId) => void;
-  setProductType: (productType: ProductType) => void;
-  setSubProductType: (subProduct: WidgetType) => void;
-  updateAppConfig: (config: AppConfig) => void;
-  updateGlobalConfig: (patch: Partial<GlobalConfig>) => void;
-  setAddOn: (key: keyof AddOnConfig, enabled: boolean) => void;
-  resetConfig: () => void;
+  updateConfigurator: (config: Partial<ConfiguratorState>) => void;
+  updateOptions: (options: Partial<ConfiguratorState["options"]>) => void;
+  updateCommon: (patch: Partial<ConfiguratorState["common"]>) => void;
+  updateAddOns: (patch: Partial<ConfiguratorState["addOns"]>) => void;
+  resetConfig: (target?: "options" | "common" | "addOns") => void;
 }
 
-type ConfiguratorStore = ConfiguratorState & ConfiguratorActions;
+interface ConfiguratorStoreState {
+  isOpen: boolean;
+  deviceInfo: DeviceFingerprint | null;
+  configurator: ConfiguratorState;
+}
 
-const DEFAULT_ADD_ONS: AddOnConfig = {
-  dock: true,
-  statusBar: false,
-  shelf: false,
-};
+type ConfiguratorStore = ConfiguratorStoreState & ConfiguratorActions;
 
 /**
  * Configurator Store
  * Manages the state of the wallpaper configurator
  */
+const initialConfiguratorState: ConfiguratorState = {
+  modelName: "iPhone 17 Pro Max",
+  screenSize: "440x956",
+  template: SUB_PRODUCT_TYPE.MONTH,
+  options: createDefaultWidgetConfig(SUB_PRODUCT_TYPE.MONTH),
+  common: {
+    theme: "auto",
+    backgroundColor: "#0b1220",
+  },
+  addOns: {
+    dock: false,
+    statusBar: false,
+    shelf: false,
+  },
+};
+
 export const useConfiguratorStore = create<ConfiguratorStore>()(
   devtools(
     (set) => ({
-      // State
       isOpen: false,
-      selectedWidget: null,
       deviceInfo: null,
-      deviceModel: DEFAULT_DEVICE_MODEL,
-      productType: DEFAULT_PRODUCT_TYPE,
-      appConfig: createDefaultAppConfig("month"),
-      addOns: DEFAULT_ADD_ONS,
+      configurator: initialConfiguratorState,
 
       // Actions
       open: (widgetType) =>
-        set((state) => {
-          const nextWidgetType = resolveWidgetTypeFromSelection(
-            widgetType ?? state.selectedWidget
-          );
-          return {
-            isOpen: true,
-            selectedWidget: widgetType ?? state.selectedWidget,
-            productType: getProductFromWidget(nextWidgetType),
-            appConfig: {
-              ...state.appConfig,
-              widget: createDefaultWidgetConfig(nextWidgetType),
-            },
-          };
-        }, false, "configurator/open"),
-
-      close: () =>
-        set(
-          { isOpen: false, selectedWidget: null },
-          false,
-          "configurator/close"
-        ),
-
-      toggle: () =>
-        set((state) => ({ isOpen: !state.isOpen }), false, "configurator/toggle"),
-
-      setWidget: (widgetType) =>
-        set((state) => {
-          if (!widgetType) {
-            return { selectedWidget: null };
-          }
-          const nextWidgetType = resolveWidgetTypeFromSelection(widgetType);
-          return {
-            selectedWidget: widgetType,
-            productType: getProductFromWidget(nextWidgetType),
-            appConfig: {
-              ...state.appConfig,
-              widget: createDefaultWidgetConfig(nextWidgetType),
-            },
-          };
-        }, false, "configurator/setWidget"),
-
-      setDeviceInfo: (info) =>
-        set(
-          {
-            deviceInfo: info,
-            deviceModel: resolveAutoDeviceModel(info),
-          },
-          false,
-          "configurator/setDeviceInfo"
-        ),
-
-      setDeviceModel: (model) =>
-        set({ deviceModel: model }, false, "configurator/setDeviceModel"),
-
-      setProductType: (productType) =>
-        set((state) => {
-          const nextSubProduct = getDefaultSubProduct(productType);
-          return {
-            productType,
-            appConfig: {
-              ...state.appConfig,
-              widget: createDefaultWidgetConfig(nextSubProduct),
-            },
-          };
-        }, false, "configurator/setProductType"),
-
-      setSubProductType: (subProduct) =>
-        set((state) => ({
-          productType: getProductFromWidget(subProduct),
-          appConfig: {
-            ...state.appConfig,
-            widget: createDefaultWidgetConfig(subProduct),
-          },
-        }), false, "configurator/setSubProductType"),
-
-      updateAppConfig: (config) =>
-        set({ appConfig: config }, false, "configurator/updateAppConfig"),
-
-      updateGlobalConfig: (patch) =>
-        set((state) => ({
-          appConfig: {
-            ...state.appConfig,
-            more: {
-              ...state.appConfig.more,
-              ...patch,
-              statusBar: patch.statusBar
-                ? {
-                    ...state.appConfig.more.statusBar,
-                    ...patch.statusBar,
-                  }
-                : state.appConfig.more.statusBar,
-            },
-          },
-        }), false, "configurator/updateGlobalConfig"),
-
-      setAddOn: (key, enabled) =>
         set(
           (state) => ({
-            addOns: {
-              ...state.addOns,
-              [key]: enabled,
+            isOpen: true,
+            configurator: {
+              ...state.configurator,
+              template: (widgetType ??
+                state.configurator
+                  .template) as typeof state.configurator.template,
             },
           }),
           false,
-          "configurator/setAddOn"
+          "configurator/open",
         ),
 
-      resetConfig: () =>
-        set((state) => {
-          const currentWidgetType = state.appConfig.widget.type;
-          return {
-            productType: getProductFromWidget(currentWidgetType),
-            appConfig: createDefaultAppConfig(currentWidgetType),
-            addOns: DEFAULT_ADD_ONS,
-          };
-        }, false, "configurator/resetConfig"),
+      close: () =>
+        set(
+          (state) => ({
+            isOpen: false,
+            configurator: {
+              ...state.configurator,
+            },
+          }),
+          false,
+          "configurator/close",
+        ),
+
+      setDeviceInfo: (info) =>
+        set(
+          (state) => ({
+            deviceInfo: info,
+            configurator: state.configurator,
+          }),
+          false,
+          "configurator/setDeviceInfo",
+        ),
+
+      updateConfigurator: (config) =>
+        set(
+          (state) => ({
+            configurator: {
+              ...state.configurator,
+              ...config,
+            },
+          }),
+          false,
+          "configurator/updateConfigurator",
+        ),
+
+      updateOptions: (options) =>
+        set(
+          (state) => ({
+            configurator: {
+              ...state.configurator,
+              options,
+            },
+          }),
+          false,
+          "configurator/updateOptions",
+        ),
+
+      updateCommon: (patch) =>
+        set(
+          (state) => ({
+            configurator: {
+              ...state.configurator,
+              common: {
+                ...state.configurator.common,
+                ...patch,
+                statusBar: patch.statusBar
+                  ? {
+                      ...(state.configurator.common.statusBar ?? {}),
+                      ...patch.statusBar,
+                    }
+                  : state.configurator.common.statusBar,
+              },
+            },
+          }),
+          false,
+          "configurator/updateCommon",
+        ),
+
+      updateAddOns: (patch) =>
+        set(
+          (state) => {
+            return {
+              configurator: {
+                ...state.configurator,
+                addOns: {
+                  ...state.configurator.addOns,
+                  ...patch,
+                },
+              },
+            };
+          },
+          false,
+          "configurator/updateAddOns",
+        ),
+
+      resetConfig: (target) =>
+        set(
+          (state) => {
+            const nextConfigurator = { ...state.configurator };
+            const shouldResetAll = !target;
+
+            if (shouldResetAll || target === "options") {
+              nextConfigurator.options = createDefaultWidgetConfig(
+                state.configurator.options.type,
+              );
+            }
+
+            if (shouldResetAll || target === "common") {
+              nextConfigurator.common = { ...initialConfiguratorState.common };
+            }
+
+            if (shouldResetAll || target === "addOns") {
+              nextConfigurator.addOns = { ...initialConfiguratorState.addOns };
+            }
+
+            return {
+              configurator: nextConfigurator,
+            };
+          },
+          false,
+          "configurator/resetConfig",
+        ),
     }),
-    { name: "ConfiguratorStore" }
-  )
+    { name: "ConfiguratorStore" },
+  ),
 );
 
 /**
  * Selectors for optimized re-renders
  */
 export const selectIsOpen = (state: ConfiguratorStore) => state.isOpen;
-
-export const selectSelectedWidget = (state: ConfiguratorStore) =>
-  state.selectedWidget;
 
 export const selectOpen = (state: ConfiguratorStore) => state.open;
 
@@ -217,30 +200,39 @@ export const selectDeviceInfo = (state: ConfiguratorStore) => state.deviceInfo;
 export const selectSetDeviceInfo = (state: ConfiguratorStore) =>
   state.setDeviceInfo;
 
-export const selectDeviceModel = (state: ConfiguratorStore) => state.deviceModel;
+export const selectConfigurator = (state: ConfiguratorStore) =>
+  state.configurator;
 
-export const selectSetDeviceModel = (state: ConfiguratorStore) =>
-  state.setDeviceModel;
+export const selectModelName = (state: ConfiguratorStore) =>
+  state.configurator.modelName;
 
-export const selectProductType = (state: ConfiguratorStore) =>
-  state.productType;
+export const selectScreenSize = (state: ConfiguratorStore) =>
+  state.configurator.screenSize;
 
-export const selectSetProductType = (state: ConfiguratorStore) =>
-  state.setProductType;
+export const selectTemplate = (state: ConfiguratorStore) =>
+  state.configurator.template;
 
-export const selectSetSubProductType = (state: ConfiguratorStore) =>
-  state.setSubProductType;
+export const selectOptions = (state: ConfiguratorStore) =>
+  state.configurator.options;
 
-export const selectAppConfig = (state: ConfiguratorStore) => state.appConfig;
+export const selectCommon = (state: ConfiguratorStore) =>
+  state.configurator.common;
 
-export const selectUpdateAppConfig = (state: ConfiguratorStore) =>
-  state.updateAppConfig;
+export const selectAddOns = (state: ConfiguratorStore) =>
+  state.configurator.addOns;
 
-export const selectUpdateGlobalConfig = (state: ConfiguratorStore) =>
-  state.updateGlobalConfig;
+// actions selectors
+export const selectUpdateConfigurator = (state: ConfiguratorStore) =>
+  state.updateConfigurator;
 
-export const selectAddOns = (state: ConfiguratorStore) => state.addOns;
+export const selectUpdateOptions = (state: ConfiguratorStore) =>
+  state.updateOptions;
 
-export const selectSetAddOn = (state: ConfiguratorStore) => state.setAddOn;
+export const selectUpdateCommon = (state: ConfiguratorStore) =>
+  state.updateCommon;
 
-export const selectResetConfig = (state: ConfiguratorStore) => state.resetConfig;
+export const selectUpdateAddOns = (state: ConfiguratorStore) =>
+  state.updateAddOns;
+
+export const selectResetConfig = (state: ConfiguratorStore) =>
+  state.resetConfig;

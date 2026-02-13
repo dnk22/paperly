@@ -1,16 +1,24 @@
+import { SUB_PRODUCT_TYPE } from "@/utils/constants";
+
 export interface GlobalConfig {
-  theme: "light" | "dark" | "auto";
-  backgroundColor: string;
+  theme?: "light" | "dark" | "auto";
+  backgroundColor?: string;
   backgroundImage?: string;
-  borderColor: string;
-  dockColor: string;
-  statusBar: {
+  borderColor?: string;
+  dockColor?: string;
+  statusBar?: {
     type: "hidden";
     color: string;
   };
-  islandBorderColor: string;
-  leftWidgetColor: string;
-  rightWidgetColor: string;
+  islandBorderColor?: string;
+  leftWidgetColor?: string;
+  rightWidgetColor?: string;
+}
+
+export interface AddOnConfig {
+  dock?: boolean;
+  statusBar?: boolean;
+  shelf?: boolean;
 }
 
 export interface TimeMetaData {
@@ -19,7 +27,7 @@ export interface TimeMetaData {
   dotHighlightColor?: string;
 }
 
-export interface MonthConfig {
+export interface MonthConfig extends TimeMetaData {
   startWeekOnMonday: boolean;
   showDayName: boolean;
   showDot: boolean;
@@ -27,12 +35,12 @@ export interface MonthConfig {
   showMoonPhase: boolean;
 }
 
-export interface YearConfig {
+export interface YearConfig extends TimeMetaData {
   startWeekOnMonday: boolean;
   showDayName: boolean;
 }
 
-export interface LifeConfig {
+export interface LifeConfig extends TimeMetaData {
   birthDate: Date;
   lifeExpectancy?: number; // optional, in years
 }
@@ -51,17 +59,33 @@ export interface RoutineConfig {
   }>;
 }
 
+export interface VisionConfig {
+  showBoundingBoxes: boolean;
+  boxColor: string;
+  showLabels: boolean;
+  labelFontSize: number;
+}
+
+export interface OwnerInfoConfig {
+  title: string;
+  note: string;
+}
+
 // Union Type cho Widget Data
-export type WidgetConfigData =
-  | { type: "month"; data: MonthConfig }
-  | { type: "quarter"; data: undefined }
-  | { type: "year"; data: YearConfig }
-  | { type: "life"; data: LifeConfig }
-  | { type: "routine"; data: RoutineConfig }
-  | { type: "vision"; data: any };
+export type OptionsConfig = MonthConfig &
+  YearConfig &
+  LifeConfig &
+  RoutineConfig &
+  CountdownConfig &
+  VisionConfig &
+  OwnerInfoConfig;
 
 // STATE TỔNG CỦA ỨNG DỤNG
-export interface AppConfig {
-  widget: WidgetConfigData;
-  more: GlobalConfig;
+export interface ConfiguratorState {
+  screenSize: string;
+  modelName: string;
+  template: keyof typeof SUB_PRODUCT_TYPE;
+  options: Partial<OptionsConfig>;
+  common: GlobalConfig;
+  addOns: AddOnConfig;
 }
