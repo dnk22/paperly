@@ -21,7 +21,6 @@ export default function DesktopConfigurator() {
         </div>
         <div className="relative z-10 transform transition-transform duration-500 hover:scale-[1.02]">
           <PreviewPanel />
-          <div className="absolute inset-0 rounded-[3rem] bg-gradient-to-tr from-white/0 via-white/5 to-white/0 pointer-events-none z-40"></div>
         </div>
       </main>
       <ConfigPanel className="scrollbar-modern" />

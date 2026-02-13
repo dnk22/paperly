@@ -13,7 +13,7 @@ export default function Download({
   const [isDownloading, setIsDownloading] = useState(false);
 
   const handleDownload = async () => {
-    const ref = document.getElementById("phone-frame");
+    const ref = document.getElementById("phone-frame-content");
     if (!ref) return;
     setIsDownloading(true);
 

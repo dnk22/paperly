@@ -1,0 +1,955 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Wallpaper Config Redesign Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Round"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#3B82F6", // Blue typical for interactive elements
+              "background-light": "#F3F4F6", // Light gray
+              "background-dark": "#0F1115", // Deep almost black for modern app feel
+              "surface-light": "#FFFFFF",
+              "surface-dark": "#1C1F26",
+              "border-light": "#E5E7EB",
+              "border-dark": "#2E333D",
+              "text-main-light": "#111827",
+              "text-main-dark": "#E5E7EB",
+              "text-muted-light": "#6B7280",
+              "text-muted-dark": "#9CA3AF",
+            },
+            fontFamily: {
+              sans: ["Inter", "sans-serif"],
+              display: ["Inter", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.5rem",
+              xl: "0.75rem",
+              "2xl": "1rem",
+            },
+            boxShadow: {
+              glow: "0 0 20px -5px rgba(59, 130, 246, 0.15)",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 4px;
+      }
+      .dark ::-webkit-scrollbar-thumb {
+        background: #374151;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+      }
+      .dark ::-webkit-scrollbar-thumb:hover {
+        background: #4b5563;
+      }
+      .toggle-checkbox:checked {
+        right: 0;
+        border-color: #3b82f6;
+      }
+      .toggle-checkbox:checked + .toggle-label {
+        background-color: #3b82f6;
+      }
+      input[type="color"]::-webkit-color-swatch-wrapper {
+        padding: 0;
+      }
+      input[type="color"]::-webkit-color-swatch {
+        border: none;
+        border-radius: 4px;
+      }
+      .hide-scroll::-webkit-scrollbar {
+        display: none;
+      }
+      .hide-scroll {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark text-text-main-light dark:text-text-main-dark font-sans h-screen flex overflow-hidden selection:bg-primary selection:text-white antialiased transition-colors duration-200"
+  >
+    <aside
+      class="w-full lg:w-[480px] xl:w-[520px] flex flex-col border-r border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark overflow-y-auto z-10 shadow-lg"
+    >
+      <header
+        class="sticky top-0 z-20 px-8 py-6 bg-surface-light/95 dark:bg-surface-dark/95 backdrop-blur border-b border-border-light dark:border-border-dark"
+      >
+        <div class="flex items-center justify-between mb-2">
+          <h1
+            class="text-2xl font-bold tracking-tight text-text-main-light dark:text-white"
+          >
+            Wallpaper Config
+          </h1>
+          <div class="flex space-x-2">
+            <button
+              class="p-2 rounded-lg text-text-muted-light dark:text-text-muted-dark hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              title="Reset"
+            >
+              <span class="material-icons-round text-xl">restart_alt</span>
+            </button>
+            <button
+              class="p-2 rounded-lg text-text-muted-light dark:text-text-muted-dark hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              title="Settings"
+            >
+              <span class="material-icons-round text-xl">settings</span>
+            </button>
+          </div>
+        </div>
+        <p
+          class="text-sm text-text-muted-light dark:text-text-muted-dark leading-relaxed"
+        >
+          Configure your widget data schema below. Appearance updates preview
+          style live.
+        </p>
+      </header>
+      <div class="p-8 space-y-10">
+        <section>
+          <div class="flex items-center gap-2 mb-6">
+            <span class="material-icons-round text-primary text-sm">tune</span>
+            <h2
+              class="text-xs font-bold uppercase tracking-wider text-text-muted-light dark:text-text-muted-dark"
+            >
+              Main Content
+            </h2>
+          </div>
+          <div class="space-y-6">
+            <div class="group">
+              <label
+                class="block text-sm font-medium mb-2 text-text-main-light dark:text-gray-300"
+              >
+                Device (Auto)
+              </label>
+              <div class="relative">
+                <select
+                  class="w-full pl-4 pr-10 py-3 bg-white dark:bg-[#15171C] border border-border-light dark:border-border-dark rounded-xl focus:ring-2 focus:ring-primary focus:border-primary appearance-none transition-shadow shadow-sm text-sm"
+                >
+                  <option>iPhone 15/16 Pro Max (430 x 932)</option>
+                  <option>iPhone 15/16 Pro (393 x 852)</option>
+                  <option>iPhone 14 Plus (428 x 926)</option>
+                  <option>Pixel 8 Pro (1344 x 2992)</option>
+                </select>
+                <span
+                  class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-text-muted-light dark:text-text-muted-dark"
+                >
+                  <span class="material-icons-round">expand_more</span>
+                </span>
+              </div>
+              <p
+                class="mt-2 text-xs text-green-600 dark:text-green-500 flex items-center gap-1"
+              >
+                <span class="material-icons-round text-[14px]"
+                  >check_circle</span
+                >
+                Auto-detected: iPhone 15/16 Pro Max
+              </p>
+            </div>
+            <div>
+              <label
+                class="block text-sm font-medium mb-2 text-text-main-light dark:text-gray-300"
+                >Product</label
+              >
+              <div class="relative">
+                <select
+                  class="w-full pl-4 pr-10 py-3 bg-white dark:bg-[#15171C] border border-border-light dark:border-border-dark rounded-xl focus:ring-2 focus:ring-primary focus:border-primary appearance-none transition-shadow shadow-sm text-sm"
+                >
+                  <option>Time &amp; Progress</option>
+                  <option>Weather Snapshot</option>
+                  <option>Calendar Agenda</option>
+                  <option>System Stats</option>
+                </select>
+                <span
+                  class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-text-muted-light dark:text-text-muted-dark"
+                >
+                  <span class="material-icons-round">expand_more</span>
+                </span>
+              </div>
+            </div>
+            <div>
+              <label
+                class="block text-sm font-medium mb-2 text-text-main-light dark:text-gray-300"
+                >Sub Product</label
+              >
+              <div class="relative">
+                <select
+                  class="w-full pl-4 pr-10 py-3 bg-white dark:bg-[#15171C] border border-border-light dark:border-border-dark rounded-xl focus:ring-2 focus:ring-primary focus:border-primary appearance-none transition-shadow shadow-sm text-sm"
+                >
+                  <option>Month</option>
+                  <option>Week View</option>
+                  <option>Day Timeline</option>
+                </select>
+                <span
+                  class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-text-muted-light dark:text-text-muted-dark"
+                >
+                  <span class="material-icons-round">expand_more</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+        <hr class="border-border-light dark:border-border-dark" />
+        <section>
+          <div class="flex items-center gap-2 mb-6">
+            <span class="material-icons-round text-primary text-sm"
+              >widgets</span
+            >
+            <h2
+              class="text-xs font-bold uppercase tracking-wider text-text-muted-light dark:text-text-muted-dark"
+            >
+              Sub Product Config
+            </h2>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <label
+              class="cursor-pointer group relative flex items-center justify-between p-4 bg-white dark:bg-[#15171C] border border-border-light dark:border-border-dark rounded-xl hover:border-primary/50 dark:hover:border-primary/50 transition-colors"
+            >
+              <span
+                class="text-sm font-medium text-text-main-light dark:text-gray-300"
+                >Start week on Monday</span
+              >
+              <div
+                class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in"
+              >
+                <input
+                  checked=""
+                  class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer checked:bg-white transition-all duration-300 left-0"
+                  id="toggle1"
+                  name="toggle"
+                  type="checkbox"
+                />
+                <label
+                  class="toggle-label block overflow-hidden h-5 rounded-full bg-gray-300 dark:bg-gray-700 cursor-pointer transition-colors duration-300"
+                  for="toggle1"
+                ></label>
+              </div>
+            </label>
+            <label
+              class="cursor-pointer group relative flex items-center justify-between p-4 bg-white dark:bg-[#15171C] border border-border-light dark:border-border-dark rounded-xl hover:border-primary/50 dark:hover:border-primary/50 transition-colors"
+            >
+              <span
+                class="text-sm font-medium text-text-main-light dark:text-gray-300"
+                >Show day name</span
+              >
+              <div
+                class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in"
+              >
+                <input
+                  checked=""
+                  class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer checked:bg-white transition-all duration-300 left-0"
+                  id="toggle2"
+                  name="toggle"
+                  type="checkbox"
+                />
+                <label
+                  class="toggle-label block overflow-hidden h-5 rounded-full bg-gray-300 dark:bg-gray-700 cursor-pointer transition-colors duration-300"
+                  for="toggle2"
+                ></label>
+              </div>
+            </label>
+            <label
+              class="cursor-pointer group relative flex items-center justify-between p-4 bg-white dark:bg-[#15171C] border border-border-light dark:border-border-dark rounded-xl hover:border-primary/50 dark:hover:border-primary/50 transition-colors"
+            >
+              <span
+                class="text-sm font-medium text-text-main-light dark:text-gray-300"
+                >Show dot</span
+              >
+              <div
+                class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in"
+              >
+                <input
+                  checked=""
+                  class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer checked:bg-white transition-all duration-300 left-0"
+                  id="toggle3"
+                  name="toggle"
+                  type="checkbox"
+                />
+                <label
+                  class="toggle-label block overflow-hidden h-5 rounded-full bg-gray-300 dark:bg-gray-700 cursor-pointer transition-colors duration-300"
+                  for="toggle3"
+                ></label>
+              </div>
+            </label>
+            <label
+              class="cursor-pointer group relative flex items-center justify-between p-4 bg-white dark:bg-[#15171C] border border-border-light dark:border-border-dark rounded-xl hover:border-primary/50 dark:hover:border-primary/50 transition-colors"
+            >
+              <span
+                class="text-sm font-medium text-text-main-light dark:text-gray-300"
+                >Show other month days</span
+              >
+              <div
+                class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in"
+              >
+                <input
+                  class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer checked:bg-white transition-all duration-300 left-0"
+                  id="toggle4"
+                  name="toggle"
+                  type="checkbox"
+                />
+                <label
+                  class="toggle-label block overflow-hidden h-5 rounded-full bg-gray-300 dark:bg-gray-700 cursor-pointer transition-colors duration-300"
+                  for="toggle4"
+                ></label>
+              </div>
+            </label>
+            <label
+              class="cursor-pointer group relative flex items-center justify-between p-4 bg-white dark:bg-[#15171C] border border-border-light dark:border-border-dark rounded-xl hover:border-primary/50 dark:hover:border-primary/50 transition-colors md:col-span-2"
+            >
+              <span
+                class="text-sm font-medium text-text-main-light dark:text-gray-300"
+                >Show moon phase</span
+              >
+              <div
+                class="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in"
+              >
+                <input
+                  class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-4 appearance-none cursor-pointer checked:bg-white transition-all duration-300 left-0"
+                  id="toggle5"
+                  name="toggle"
+                  type="checkbox"
+                />
+                <label
+                  class="toggle-label block overflow-hidden h-5 rounded-full bg-gray-300 dark:bg-gray-700 cursor-pointer transition-colors duration-300"
+                  for="toggle5"
+                ></label>
+              </div>
+            </label>
+          </div>
+        </section>
+        <hr class="border-border-light dark:border-border-dark" />
+        <section>
+          <div
+            class="flex items-center justify-between mb-6 cursor-pointer group"
+          >
+            <div class="flex items-center gap-2">
+              <span class="material-icons-round text-primary text-sm"
+                >palette</span
+              >
+              <h2
+                class="text-xs font-bold uppercase tracking-wider text-text-muted-light dark:text-text-muted-dark group-hover:text-text-main-light dark:group-hover:text-white transition-colors"
+              >
+                Appearance &amp; Add-ons
+              </h2>
+            </div>
+            <span
+              class="material-icons-round text-text-muted-light dark:text-text-muted-dark group-hover:text-text-main-light dark:group-hover:text-white transition-transform transform rotate-180"
+              >expand_less</span
+            >
+          </div>
+          <div class="space-y-8">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <h3
+                  class="text-xs font-semibold text-text-muted-light dark:text-text-muted-dark tracking-wide uppercase"
+                >
+                  Background
+                </h3>
+                <div
+                  class="flex bg-gray-200 dark:bg-surface-dark p-1 rounded-lg border border-border-light dark:border-border-dark"
+                >
+                  <button
+                    class="px-3 py-1 text-xs font-medium rounded-md bg-white dark:bg-gray-700 shadow-sm text-text-main-light dark:text-white transition-all"
+                  >
+                    Color
+                  </button>
+                  <button
+                    class="px-3 py-1 text-xs font-medium rounded-md text-text-muted-light dark:text-text-muted-dark hover:text-text-main-light dark:hover:text-white transition-all"
+                  >
+                    Image
+                  </button>
+                </div>
+              </div>
+              <div class="hidden">
+                <div class="flex gap-3 overflow-x-auto pb-2 hide-scroll">
+                  <button
+                    class="flex-shrink-0 w-20 h-28 rounded-xl border-2 border-dashed border-border-light dark:border-border-dark hover:border-primary dark:hover:border-primary flex flex-col items-center justify-center gap-2 group transition-colors"
+                  >
+                    <div
+                      class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors"
+                    >
+                      <span class="material-icons-round text-primary text-lg"
+                        >add</span
+                      >
+                    </div>
+                    <span
+                      class="text-[10px] font-medium text-text-muted-light dark:text-text-muted-dark group-hover:text-primary transition-colors"
+                      >Upload</span
+                    >
+                  </button>
+                  <button
+                    class="flex-shrink-0 w-20 h-28 rounded-xl overflow-hidden relative group ring-2 ring-primary ring-offset-2 ring-offset-white dark:ring-offset-[#15171C]"
+                  >
+                    <div
+                      class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"
+                    ></div>
+                    <img
+                      alt="Nature"
+                      class="w-full h-full object-cover"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIu4AKLNc6D-JJJzZpoo5pQ6ilV5urTOr4COzJretM17sz2p5kw0nDmsFHth1cNjDZnue6mvozhQOVQwadID8RkxlrLSfgYsgdAW6LRBIi1iXgXp3VTMntCw_SOvXfR91U9fNJE_2lVYQww6teo779Ntga0xM47kTOrARUUgbaGOD6xGdOCCX6EZtwcxz8JOGUSrd1cHxRwkR-Mm7OlrO8PNfDLudrm57OATEPPJd7It2qB55xIP0uiY_TMAL5tszX8ysWPlZyyQ"
+                    />
+                  </button>
+                  <button
+                    class="flex-shrink-0 w-20 h-28 rounded-xl overflow-hidden relative group border border-border-light dark:border-border-dark hover:border-primary transition-colors"
+                  >
+                    <div
+                      class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"
+                    ></div>
+                    <img
+                      alt="Abstract"
+                      class="w-full h-full object-cover"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhVqPXTso8PGoGnv4hqa1S_9M0uXme8iYsef740-qITNdpuZMe7Ch0pmnx6GjmO6SQe_MUJc9IoGY8LHcrTSazTGGDkuoiAWKYxm4z8go4HsYsOaQYSHoagf4E2zmubs0MtNiTVg3P4eYhEgMygbsfe-vpd2gu-CiHOpkbj3n5Ihd1EgoHKXR5DUd_fR6VyWKC9rzpzgnJxO7JktJuNWLJOkzTYhNJAHcGzshbP3LKvqSEFBpquehMYm1t1nh1jK1Gkl7VPpp0hw"
+                    />
+                  </button>
+                  <button
+                    class="flex-shrink-0 w-20 h-28 rounded-xl overflow-hidden relative group border border-border-light dark:border-border-dark hover:border-primary transition-colors"
+                  >
+                    <div
+                      class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"
+                    ></div>
+                    <img
+                      alt="City"
+                      class="w-full h-full object-cover"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaV-GNGqP3UCj5iAGKQuOtnNbT-UyLfaR-Cscn0M61UqodmGpNKISup81a4dhg2ftfT_Batwhm7tP50zy_WFm5LASw_Nx8Zqt-6ZFGEXoMH_V8uc_ugzzmQbuiJIgjcK7DeSV-xH925UEDD1JbV8M0DeLefd4AsZmH2lXojOcq-w8WyBeVaFYVVQJtCA15axMRUAznIaWE_kpe4ieNppdQytt5C5pq_xsMBP7omsQL3fGnYkj_6m8wZUr35RWvmpDQtnn717ZGZw"
+                    />
+                  </button>
+                  <button
+                    class="flex-shrink-0 w-20 h-28 rounded-xl overflow-hidden relative group border border-border-light dark:border-border-dark hover:border-primary transition-colors"
+                  >
+                    <div
+                      class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"
+                    ></div>
+                    <img
+                      alt="Texture"
+                      class="w-full h-full object-cover"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnMYtOU2nyQpTsgk2QidxrEnfingrBqwIGkBv6fBKtoTWvJtHnhubvV8fOhQtzgJo-00l06E7SOJXVFjjRMpNY32urEuNDK8dVAuIHgN1DxrqIBsy84cGcc7bKN3qiAQczc2uXbxIwlBSZpl0QKSE_B0LS-XQjsNU0UuVM0he5eGr3Jqf26x1jMjcFaFf6MAKqO2VSQsj7nuSuWKo1hw0fQ1qqe3qZhYk7ONre9tt0VQY1SCzwkdMsmTwjr7fio5bH9UsBryC-BA"
+                    />
+                  </button>
+                </div>
+              </div>
+              <div class="block">
+                <label
+                  class="block text-sm font-medium mb-2 text-text-main-light dark:text-gray-300"
+                  >Solid Color</label
+                >
+                <div class="flex gap-2">
+                  <div
+                    class="h-10 w-14 shrink-0 relative overflow-hidden rounded-lg border border-border-light dark:border-border-dark shadow-sm"
+                  >
+                    <input
+                      class="absolute -top-2 -left-2 w-[150%] h-[150%] p-0 m-0 cursor-pointer"
+                      type="color"
+                      value="#0b1220"
+                    />
+                  </div>
+                  <input
+                    class="flex-1 w-full px-4 py-2 bg-white dark:bg-[#15171C] border border-border-light dark:border-border-dark rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-sm font-mono text-text-main-light dark:text-gray-300 placeholder-text-muted-light"
+                    type="text"
+                    value="#0b1220"
+                  />
+                </div>
+              </div>
+              <div class="mt-4">
+                <label
+                  class="block text-sm font-medium mb-2 text-text-main-light dark:text-gray-300"
+                  >Select Image</label
+                >
+                <div class="flex gap-3 overflow-x-auto pb-4 hide-scroll">
+                  <button
+                    class="flex-shrink-0 w-20 h-28 rounded-xl border-2 border-dashed border-border-light dark:border-border-dark bg-white dark:bg-[#15171C] hover:border-primary dark:hover:border-primary flex flex-col items-center justify-center gap-2 group transition-colors cursor-pointer"
+                  >
+                    <div
+                      class="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-800 group-hover:bg-primary/10 flex items-center justify-center transition-colors"
+                    >
+                      <span
+                        class="material-icons-round text-text-muted-light dark:text-text-muted-dark group-hover:text-primary text-xl"
+                        >add</span
+                      >
+                    </div>
+                    <span
+                      class="text-[10px] font-medium text-text-muted-light dark:text-text-muted-dark group-hover:text-primary transition-colors"
+                      >Upload</span
+                    >
+                  </button>
+                  <button
+                    class="flex-shrink-0 w-20 h-28 rounded-xl overflow-hidden relative group ring-2 ring-primary ring-offset-2 ring-offset-white dark:ring-offset-[#15171C] shadow-md"
+                  >
+                    <img
+                      alt="Nature"
+                      class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuAn6bkDKQtXca72de_N6cHuQdAUPc0Sj46D1Y0DQ-rkT06LUP2kB16xrS5fQhAtHjO8AhNeU_BUomTnlysfEbBL1kWWQMxz-Odr34YX52zmQpopi492esnuLqabpF8GWFnYtAQaWEuigtvxdiIkwwTc-7YLGA_POmgStZO3RFK5MnfxDKUdhIQPABX6vIV-n4avRClUE3OFxDTNTIuJhztArZ6rzBdZN6C-lHewCp7NbjlPR-03Zz6ihVfAuXGzcTTF11gz3xbhMw"
+                    />
+                    <div
+                      class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-2"
+                    >
+                      <span class="text-[10px] text-white font-medium"
+                        >Nature</span
+                      >
+                    </div>
+                  </button>
+                  <button
+                    class="flex-shrink-0 w-20 h-28 rounded-xl overflow-hidden relative group border border-border-light dark:border-border-dark hover:border-primary transition-colors shadow-sm"
+                  >
+                    <img
+                      alt="Abstract"
+                      class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVM4cY6H2G1IW01XNo1auidyIPnttAEMFCcdtBsdH0Lp3Tms_qYCZ7t5-X-W7-lhcjYLL8uf1uKHiTqNDt8nJMqzyV1mLK5VRvPrEMtX0Plg1nQbquHwz2W-2s4p9ub9C8e4LELg9lm8w_v4hhEmKL3tqOsM0S_mCHDLQcM6aLbWQiO7r0ed8yErxSfTDf-VcsAMZ0wQa6VuqnI20Z42kpcFXx7UBd1kH05O3hc2Qu4eVGTq1-fNQfFLGCnG5nM8piQHvNbnoGnA"
+                    />
+                  </button>
+                  <button
+                    class="flex-shrink-0 w-20 h-28 rounded-xl overflow-hidden relative group border border-border-light dark:border-border-dark hover:border-primary transition-colors shadow-sm"
+                  >
+                    <img
+                      alt="City"
+                      class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSmSiPEpXn8vBq5wWlEcL9lC2MUtV7N-TZjFz5NDIdGYwhmJyJUo0g_bIzEG6bLw17c8jSed-kUwqEhxY4t_vvEH6pqQ_oZOPYQWuuiRmYKPy0DlZ6lrm8P-k8SDUzNx0gB7L8DYjo7eY-bCSK-OhFdxEBCRV_ZF_IuI5oJe4wxlkUl8f_mGB1w41nMON6fiRM-sxTq8gf0Thdf5N3PQJQlM3dpdonH_2I4ZfS4u5LVuHkEhsSDi84_Eu2-grUyU-8IvWc1W4HAQ"
+                    />
+                  </button>
+                  <button
+                    class="flex-shrink-0 w-20 h-28 rounded-xl overflow-hidden relative group border border-border-light dark:border-border-dark hover:border-primary transition-colors shadow-sm"
+                  >
+                    <img
+                      alt="Texture"
+                      class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                      src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZOALO1dgaggfIKkBMFJP_SaEmxpuu4PouVWNLUu3CiBOMGKO6TlmI6goeGRxOn-Q8DX96IwWTz5ja2Onk1BWLOTNObtM9GRUZHm4jNvyd6cea6RHfhHn9QarR6bjCcJ8QnyQ_tdJaSGtaxck01WzsY1V6VyFblpvfumoy4cFzdBIizUwa2pIz13JCvXUKggUtT74Pj69_aVa_wMCrv5cQSwFtNy4Y2i0zeUN2dZRv7l_L2qXUwfbxtKLXxGIbwXJxhdcyuKpcyQ"
+                    />
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="space-y-4">
+              <h3
+                class="text-xs font-semibold text-text-muted-light dark:text-text-muted-dark tracking-wide uppercase mb-3"
+              >
+                Theme / Colors
+              </h3>
+              <div class="space-y-4">
+                <div
+                  class="grid grid-cols-3 gap-2 p-1 bg-gray-100 dark:bg-[#15171C] rounded-xl border border-border-light dark:border-border-dark"
+                >
+                  <button
+                    class="py-2 text-xs font-medium rounded-lg text-text-muted-light dark:text-text-muted-dark hover:bg-white dark:hover:bg-gray-800 shadow-none hover:shadow-sm transition-all"
+                  >
+                    Auto
+                  </button>
+                  <button
+                    class="py-2 text-xs font-medium rounded-lg text-text-muted-light dark:text-text-muted-dark hover:bg-white dark:hover:bg-gray-800 shadow-none hover:shadow-sm transition-all"
+                  >
+                    Light
+                  </button>
+                  <button
+                    class="py-2 text-xs font-medium rounded-lg bg-white dark:bg-gray-700 text-text-main-light dark:text-white shadow-sm transition-all"
+                  >
+                    Dark
+                  </button>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                  <div
+                    class="flex items-center gap-3 p-2 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-[#15171C] hover:border-primary/50 transition-colors"
+                  >
+                    <div
+                      class="h-8 w-8 shrink-0 relative overflow-hidden rounded-full border border-border-light dark:border-border-dark ring-1 ring-white/10"
+                    >
+                      <input
+                        class="absolute -top-2 -left-2 w-[150%] h-[150%] p-0 m-0 cursor-pointer"
+                        type="color"
+                        value="#ffffff"
+                      />
+                    </div>
+                    <div class="flex flex-col min-w-0">
+                      <span
+                        class="text-[11px] text-text-muted-light dark:text-text-muted-dark truncate"
+                        >Border</span
+                      >
+                      <span
+                        class="text-xs font-mono text-text-main-light dark:text-gray-300"
+                        >#FFFFFF</span
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center gap-3 p-2 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-[#15171C] hover:border-primary/50 transition-colors"
+                  >
+                    <div
+                      class="h-8 w-8 shrink-0 relative overflow-hidden rounded-full border border-border-light dark:border-border-dark ring-1 ring-white/10"
+                    >
+                      <input
+                        class="absolute -top-2 -left-2 w-[150%] h-[150%] p-0 m-0 cursor-pointer"
+                        type="color"
+                        value="#ffffff"
+                      />
+                    </div>
+                    <div class="flex flex-col min-w-0">
+                      <span
+                        class="text-[11px] text-text-muted-light dark:text-text-muted-dark truncate"
+                        >Dock</span
+                      >
+                      <span
+                        class="text-xs font-mono text-text-main-light dark:text-gray-300"
+                        >#FFFFFF</span
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center gap-3 p-2 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-[#15171C] hover:border-primary/50 transition-colors"
+                  >
+                    <div
+                      class="h-8 w-8 shrink-0 relative overflow-hidden rounded-full border border-border-light dark:border-border-dark ring-1 ring-white/10"
+                    >
+                      <input
+                        class="absolute -top-2 -left-2 w-[150%] h-[150%] p-0 m-0 cursor-pointer"
+                        type="color"
+                        value="#ffffff"
+                      />
+                    </div>
+                    <div class="flex flex-col min-w-0">
+                      <span
+                        class="text-[11px] text-text-muted-light dark:text-text-muted-dark truncate"
+                        >Status Bar</span
+                      >
+                      <span
+                        class="text-xs font-mono text-text-main-light dark:text-gray-300"
+                        >#FFFFFF</span
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center gap-3 p-2 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-[#15171C] hover:border-primary/50 transition-colors"
+                  >
+                    <div
+                      class="h-8 w-8 shrink-0 relative overflow-hidden rounded-full border border-border-light dark:border-border-dark ring-1 ring-white/10"
+                    >
+                      <input
+                        class="absolute -top-2 -left-2 w-[150%] h-[150%] p-0 m-0 cursor-pointer"
+                        type="color"
+                        value="#ffffff"
+                      />
+                    </div>
+                    <div class="flex flex-col min-w-0">
+                      <span
+                        class="text-[11px] text-text-muted-light dark:text-text-muted-dark truncate"
+                        >Island</span
+                      >
+                      <span
+                        class="text-xs font-mono text-text-main-light dark:text-gray-300"
+                        >#FFFFFF</span
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center gap-3 p-2 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-[#15171C] hover:border-primary/50 transition-colors"
+                  >
+                    <div
+                      class="h-8 w-8 shrink-0 relative overflow-hidden rounded-full border border-border-light dark:border-border-dark ring-1 ring-white/10"
+                    >
+                      <input
+                        class="absolute -top-2 -left-2 w-[150%] h-[150%] p-0 m-0 cursor-pointer"
+                        type="color"
+                        value="#b8d9ff"
+                      />
+                    </div>
+                    <div class="flex flex-col min-w-0">
+                      <span
+                        class="text-[11px] text-text-muted-light dark:text-text-muted-dark truncate"
+                        >Left Widget</span
+                      >
+                      <span
+                        class="text-xs font-mono text-text-main-light dark:text-gray-300"
+                        >#B8D9FF</span
+                      >
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center gap-3 p-2 rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-[#15171C] hover:border-primary/50 transition-colors"
+                  >
+                    <div
+                      class="h-8 w-8 shrink-0 relative overflow-hidden rounded-full border border-border-light dark:border-border-dark ring-1 ring-white/10"
+                    >
+                      <input
+                        class="absolute -top-2 -left-2 w-[150%] h-[150%] p-0 m-0 cursor-pointer"
+                        type="color"
+                        value="#f9d7ff"
+                      />
+                    </div>
+                    <div class="flex flex-col min-w-0">
+                      <span
+                        class="text-[11px] text-text-muted-light dark:text-text-muted-dark truncate"
+                        >Right Widget</span
+                      >
+                      <span
+                        class="text-xs font-mono text-text-main-light dark:text-gray-300"
+                        >#F9D7FF</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div class="pt-8">
+          <button
+            class="w-full py-4 bg-primary hover:bg-blue-600 text-white font-semibold rounded-xl transition-all shadow-lg hover:shadow-primary/30 flex justify-center items-center gap-2"
+          >
+            <span class="material-icons-round">save</span>
+            Save Configuration
+          </button>
+        </div>
+      </div>
+      <div
+        class="mt-auto px-8 py-6 border-t border-border-light dark:border-border-dark text-xs text-text-muted-light dark:text-text-muted-dark flex justify-between"
+      >
+        <span>v2.4.0-beta</span>
+        <span class="flex items-center gap-1"
+          ><span class="w-2 h-2 rounded-full bg-green-500"></span> System
+          Online</span
+        >
+      </div>
+    </aside>
+    <main
+      class="flex-1 relative flex flex-col items-center justify-center p-8 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-gray-200 via-gray-100 to-gray-200 dark:from-[#1C1F26] dark:via-[#0F1115] dark:to-[#000000] overflow-hidden"
+    >
+      <div
+        class="absolute inset-0 z-0 opacity-[0.4] dark:opacity-[0.1]"
+        style="
+          background-image:
+            linear-gradient(#9ca3af 1px, transparent 1px),
+            linear-gradient(90deg, #9ca3af 1px, transparent 1px);
+          background-size: 40px 40px;
+        "
+      ></div>
+      <div class="absolute top-6 right-8 flex space-x-4 z-20">
+        <div
+          class="bg-surface-light dark:bg-surface-dark p-1 rounded-lg border border-border-light dark:border-border-dark shadow-sm flex items-center"
+        >
+          <button
+            class="p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800 text-text-muted-light dark:text-text-muted-dark"
+            title="Desktop View"
+          >
+            <span class="material-icons-round text-lg">desktop_windows</span>
+          </button>
+          <button
+            class="p-2 rounded bg-gray-200 dark:bg-gray-700 text-primary"
+            title="Mobile View"
+          >
+            <span class="material-icons-round text-lg">smartphone</span>
+          </button>
+        </div>
+        <button
+          class="bg-surface-light dark:bg-surface-dark px-4 py-2 rounded-lg border border-border-light dark:border-border-dark shadow-sm text-sm font-medium text-text-main-light dark:text-white flex items-center gap-2 hover:bg-gray-50 dark:hover:bg-gray-800 transition"
+        >
+          <span class="material-icons-round text-lg">share</span> Share Preview
+        </button>
+      </div>
+      <div
+        class="relative z-10 transform transition-transform duration-500 hover:scale-[1.02]"
+      >
+        <div
+          class="relative w-[340px] h-[680px] bg-black rounded-[3rem] shadow-2xl border-[8px] border-gray-900 overflow-hidden ring-1 ring-white/10"
+        >
+          <div
+            class="absolute top-0 left-1/2 transform -translate-x-1/2 h-[32px] w-[100px] bg-black rounded-b-[18px] z-30 flex items-center justify-center"
+          >
+            <div class="w-16 h-4 bg-black rounded-full"></div>
+          </div>
+          <div
+            class="absolute top-3 left-0 right-0 px-8 flex justify-between text-white text-xs font-medium z-20"
+          >
+            <span>9:41</span>
+            <div class="flex items-center gap-1.5">
+              <span class="material-icons-round text-[14px]"
+                >signal_cellular_alt</span
+              >
+              <span class="material-icons-round text-[14px]">wifi</span>
+              <span class="material-icons-round text-[14px]">battery_full</span>
+            </div>
+          </div>
+          <div
+            class="w-full h-full bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 text-white relative"
+          >
+            <div class="absolute inset-0 opacity-40 mix-blend-overlay">
+              <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <filter id="noiseFilter">
+                  <feTurbulence
+                    baseFrequency="0.65"
+                    numOctaves="3"
+                    stitchTiles="stitch"
+                    type="fractalNoise"
+                  ></feTurbulence>
+                </filter>
+                <rect
+                  filter="url(#noiseFilter)"
+                  height="100%"
+                  width="100%"
+                ></rect>
+              </svg>
+            </div>
+            <div
+              class="absolute top-16 left-6 right-6 flex flex-col items-center"
+            >
+              <div class="text-white/70 text-lg font-medium mb-1">
+                Monday, October 24
+              </div>
+              <div
+                class="text-7xl font-light tracking-tighter mb-8 font-display"
+              >
+                09:41
+              </div>
+            </div>
+            <div class="absolute top-[30%] left-6 right-6">
+              <div
+                class="bg-black/20 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-lg"
+              >
+                <div class="flex justify-between items-center mb-6">
+                  <h3 class="text-lg font-semibold">October</h3>
+                  <div class="flex gap-2">
+                    <span class="w-2 h-2 rounded-full bg-white/30"></span>
+                    <span class="w-2 h-2 rounded-full bg-white"></span>
+                    <span class="w-2 h-2 rounded-full bg-white/30"></span>
+                  </div>
+                </div>
+                <div class="grid grid-cols-7 gap-y-4 text-center text-sm mb-4">
+                  <div class="text-white/40 text-xs">M</div>
+                  <div class="text-white/40 text-xs">T</div>
+                  <div class="text-white/40 text-xs">W</div>
+                  <div class="text-white/40 text-xs">T</div>
+                  <div class="text-white/40 text-xs">F</div>
+                  <div class="text-white/40 text-xs">S</div>
+                  <div class="text-white/40 text-xs">S</div>
+                  <span class="text-white/20">26</span>
+                  <span class="text-white/20">27</span>
+                  <span class="text-white/20">28</span>
+                  <span class="text-white/20">29</span>
+                  <span class="text-white/20">30</span>
+                  <span>1</span>
+                  <span>2</span>
+                  <span>3</span>
+                  <span>4</span>
+                  <span>5</span>
+                  <span>6</span>
+                  <span>7</span>
+                  <span>8</span>
+                  <span>9</span>
+                  <span>10</span>
+                  <span>11</span>
+                  <span>12</span>
+                  <span>13</span>
+                  <span>14</span>
+                  <span>15</span>
+                  <span>16</span>
+                  <span>17</span>
+                  <span>18</span>
+                  <span>19</span>
+                  <span>20</span>
+                  <span>21</span>
+                  <span>22</span>
+                  <span>23</span>
+                  <span class="relative">
+                    <span
+                      class="absolute inset-0 bg-primary rounded-full -m-1 -z-10 shadow-lg shadow-primary/40"
+                    ></span>
+                    24
+                  </span>
+                  <span>25</span>
+                  <span>26</span>
+                  <span>27</span>
+                  <span>28</span>
+                  <span>29</span>
+                  <span>30</span>
+                </div>
+              </div>
+              <div
+                class="mt-4 bg-black/20 backdrop-blur-md rounded-full h-12 flex items-center px-4 border border-white/5"
+              >
+                <span class="material-icons-round text-white/60 mr-3"
+                  >calendar_today</span
+                >
+                <div class="flex-1 flex flex-col justify-center">
+                  <div
+                    class="flex justify-between text-[10px] uppercase font-bold tracking-wider mb-1 text-white/50"
+                  >
+                    <span>Year Progress</span>
+                    <span>82%</span>
+                  </div>
+                  <div class="h-1.5 bg-white/10 rounded-full overflow-hidden">
+                    <div
+                      class="h-full bg-primary w-[82%] rounded-full shadow-[0_0_10px_rgba(59,130,246,0.5)]"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="absolute bottom-6 left-6 right-6 flex justify-between items-center"
+            >
+              <div
+                class="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center"
+              >
+                <span class="material-icons-round">flashlight_on</span>
+              </div>
+              <div
+                class="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center"
+              >
+                <span class="material-icons-round">camera_alt</span>
+              </div>
+            </div>
+            <div
+              class="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-white rounded-full"
+            ></div>
+          </div>
+        </div>
+        <div
+          class="absolute inset-0 rounded-[3rem] bg-gradient-to-tr from-white/0 via-white/5 to-white/0 pointer-events-none z-40"
+        ></div>
+      </div>
+      <div class="mt-8 text-center">
+        <p
+          class="text-sm font-medium text-text-muted-light dark:text-text-muted-dark"
+        >
+          Preview Mode: Interactive
+        </p>
+        <div class="flex gap-2 justify-center mt-2">
+          <span class="w-1.5 h-1.5 bg-primary rounded-full"></span>
+          <span
+            class="w-1.5 h-1.5 bg-gray-300 dark:bg-gray-700 rounded-full"
+          ></span>
+          <span
+            class="w-1.5 h-1.5 bg-gray-300 dark:bg-gray-700 rounded-full"
+          ></span>
+        </div>
+      </div>
+    </main>
+    <div class="fixed bottom-6 right-6 z-50">
+      <button
+        class="bg-surface-light dark:bg-surface-dark text-text-main-light dark:text-white p-3 rounded-full shadow-lg border border-border-light dark:border-border-dark hover:scale-110 transition-transform"
+        onclick="document.documentElement.classList.toggle('dark')"
+      >
+        <span class="material-icons-round dark:hidden">dark_mode</span>
+        <span class="material-icons-round hidden dark:block">light_mode</span>
+      </button>
+    </div>
+  </body>
+</html>
