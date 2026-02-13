@@ -45,44 +45,29 @@ export function getSafeZonePct(screenClass: ScreenClass): SafeZonePct {
  * These values are heuristics to give users a realistic sense of layout.
  * They are NOT extracted from real devices and MUST NOT be rendered into the final wallpaper image.
  */
-export function getOverlaySpec(screenClass: ScreenClass): OverlaySpec {
+export function getOverlaySpec(): OverlaySpec {
   const base = {
     statusBar: {
-      heightPct:
-        screenClass === "classic"
-          ? 0.045
-          : screenClass === "notch"
-            ? 0.055
-            : 0.06,
+      normalHeightPct: 0.045,
+      notchHeightPct: 0.055,
+      dynamicHeightPct: 0.06,
+    },
+    notch: {
+      widthPct: 0.45,
+      heightPct: 0.045,
+      topPct: 0.015,
+      radiusPct: 0.02,
+    },
+    dynamicIsland: {
+      widthPct: 0.28,
+      heightPct: 0.035,
+      topPct: 0.018,
+      radiusPct: 0.02,
     },
     frame: {
       cornerRadiusPct: 0.06,
     },
   };
-
-  if (screenClass === "dynamic-island") {
-    return {
-      ...base,
-      dynamicIsland: {
-        widthPct: 0.28,
-        heightPct: 0.035,
-        topPct: 0.018,
-        radiusPct: 0.02,
-      },
-    };
-  }
-
-  if (screenClass === "notch") {
-    return {
-      ...base,
-      notch: {
-        widthPct: 0.45,
-        heightPct: 0.045,
-        topPct: 0.015,
-        radiusPct: 0.02,
-      },
-    };
-  }
 
   return base;
 }
@@ -102,7 +87,7 @@ export function createScreenProfile(
     logical,
     screenClass,
     safeZonePct: getSafeZonePct(screenClass),
-    overlay: getOverlaySpec(screenClass),
+    overlay: getOverlaySpec(),
   };
 }
 
