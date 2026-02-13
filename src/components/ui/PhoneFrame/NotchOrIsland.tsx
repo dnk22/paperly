@@ -1,32 +1,57 @@
-import { DeviceSpec } from "@/types/devices";
+import { ScreenProfile } from "@/types/models";
+import { STATUS_BAR_TYPES } from "@/utils/constants";
 
 const NotchOrIsland = ({
   spec,
   scale,
+  modelName,
 }: {
-  spec: DeviceSpec;
+  spec: ScreenProfile;
   scale: number;
+  modelName?: string;
 }) => {
-  if (spec.type === "dynamic-island") {
+  const normalizedModelName = modelName
+    ?.replace(/^iPhone\s+/i, "")
+    .trim();
+  const statusBarType = normalizedModelName
+    ? STATUS_BAR_TYPES.notch.includes(normalizedModelName)
+      ? "notch"
+      : STATUS_BAR_TYPES.normal.includes(normalizedModelName)
+        ? "normal"
+        : "dynamicIsland"
+    : "auto";
+
+  const dynamicIslandSpec = spec.overlay.dynamicIsland;
+  const notchSpec = spec.overlay.notch;
+  const shouldShowDynamicIsland =
+    statusBarType === "dynamicIsland" ||
+    (statusBarType === "auto" && !!dynamicIslandSpec);
+  const shouldShowNotch =
+    statusBarType === "notch" || (statusBarType === "auto" && !!notchSpec);
+
+  if (shouldShowDynamicIsland && dynamicIslandSpec) {
     return (
       <div
-        className="absolute left-1/2 -translate-x-1/2 bg-neutral-700 rounded-full z-50 pointer-events-none"
+        className="absolute left-1/2 -translate-x-1/2 bg-black rounded-full z-50 pointer-events-none"
         style={{
-          top: `${11 * scale}px`,
-          width: `${(spec.notchWidth || 120) * scale}px`,
-          height: `${(spec.notchHeight || 35) * scale}px`,
+          top: `${spec.logical.height * dynamicIslandSpec.topPct * scale}px`,
+          width: `${spec.logical.width * dynamicIslandSpec.widthPct * scale}px`,
+          height: `${spec.logical.height * dynamicIslandSpec.heightPct * scale}px`,
         }}
       />
     );
   }
 
-  if (spec.type === "notch") {
+  if (
+    (shouldShowNotch || (shouldShowDynamicIsland && !dynamicIslandSpec)) &&
+    notchSpec
+  ) {
     return (
       <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 bg-neutral-700 z-50 pointer-events-none border-b border-l border-r border-neutral-900"
+        className="absolute top-0 left-1/2 -translate-x-1/2 bg-black z-50 pointer-events-none border-b border-l border-r border-neutral-900"
         style={{
-          width: `${(spec.notchWidth || 160) * scale}px`,
-          height: `${(spec.notchHeight || 30) * scale}px`,
+          width: `${spec.logical.width * notchSpec.widthPct * scale}px`,
+          height: `${spec.logical.height * notchSpec.heightPct * scale}px`,
           borderBottomLeftRadius: `${20 * scale}px`,
           borderBottomRightRadius: `${20 * scale}px`,
         }}

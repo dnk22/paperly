@@ -1,13 +1,13 @@
-import { DeviceSpec } from "@/types/devices";
-import {
-  BatteryFull,
-  Camera,
-  Flashlight,
-  SignalMedium,
-  Wifi,
-} from "lucide-react";
+import { ScreenProfile } from "@/types/models";
+import { BatteryFull, Camera, Flashlight, SignalMedium } from "lucide-react";
 
-const LockScreenOverlay = ({ spec }: { spec: DeviceSpec }) => {
+const LockScreenOverlay = ({
+  spec,
+  scale,
+}: {
+  spec: ScreenProfile;
+  scale: number;
+}) => {
   const formattedTime = new Date()
     .toLocaleTimeString("en-US", {
       hour: "2-digit",
@@ -22,10 +22,17 @@ const LockScreenOverlay = ({ spec }: { spec: DeviceSpec }) => {
     month: "long",
   });
 
+  const topPct = spec.overlay?.dynamicIsland
+    ? spec.overlay?.dynamicIsland.topPct
+    : spec.overlay?.notch?.topPct;
+  console.log(topPct, "topPct");
+
   return (
     <div
       className="ui-overlay absolute inset-0 z-20 pointer-events-none flex flex-col justify-between text-white pb-2"
-      style={{ paddingTop: `${spec.statusBarTop}px` }}
+      style={{
+        paddingTop: `${spec.logical.height * (topPct || 0.05) * scale}px`,
+      }}
     >
       <div>
         <div className="h-[44px] w-full flex justify-between items-center px-8 pb-1 text-[16px] font-medium">
@@ -34,7 +41,6 @@ const LockScreenOverlay = ({ spec }: { spec: DeviceSpec }) => {
           </div>
 
           <div className="w-[100px] flex items-center justify-end gap-2 pr-1">
-            <Wifi size={20} strokeWidth={2.5} />
             <div className="scale-90">
               <SignalMedium size={20} strokeWidth={2.5} />
             </div>
