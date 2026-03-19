@@ -7,7 +7,7 @@ export interface GlobalConfig {
   borderColor?: string;
   dockColor?: string;
   statusBar?: {
-    type: "hidden";
+    type?: "hidden" | undefined;
     color: string;
   };
   islandBorderColor?: string;
@@ -78,7 +78,7 @@ export type OptionsConfig = MonthConfig &
   RoutineConfig &
   CountdownConfig &
   VisionConfig &
-  OwnerInfoConfig;
+  OwnerInfoConfig & any; // 'any' để cho phép các cấu hình khác nếu cần
 
 // STATE TỔNG CỦA ỨNG DỤNG
 export interface ConfiguratorState {
