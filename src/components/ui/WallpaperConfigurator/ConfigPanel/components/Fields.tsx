@@ -7,7 +7,7 @@ export function BooleanField({
   className = "",
 }: {
   label: string;
-  checked: boolean;
+  checked: boolean | undefined;
   onChange: (checked: boolean) => void;
   className?: string;
 }) {

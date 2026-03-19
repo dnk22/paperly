@@ -113,7 +113,7 @@ export default function DisplayOptionsSection() {
           </div>
         )}
 
-        {template === SUB_PRODUCT_TYPE.LIFE && (
+        {template === SUB_PRODUCT_TYPE.LIFE_TIME && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className={labelClassName}>Birth date</label>
