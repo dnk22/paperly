@@ -1,5 +1,6 @@
 import { SlidersHorizontal } from "lucide-react";
 import Select from "@/components/common/Select";
+import { useLanguage } from "@/context/LanguageContext";
 import {
   selectModelName,
   selectScreenSize,
@@ -13,6 +14,7 @@ import MODEL_ALIASES from "@/models/generated/modelAliases.json";
 import { PRODUCT_CONFIGS } from "@/utils/constants";
 
 export default function MainContentSection() {
+  const { t } = useLanguage();
   const modelName = useConfiguratorStore(selectModelName);
   const screenSize = useConfiguratorStore(selectScreenSize);
   const template = useConfiguratorStore(selectTemplate);
@@ -22,11 +24,11 @@ export default function MainContentSection() {
     <section>
       <div className="flex items-center gap-2 mb-6">
         <SlidersHorizontal className="h-4 w-4 text-primary" />
-        <h2 className={sectionTitleClassName}>What to Show</h2>
+        <h2 className={sectionTitleClassName}>{t.configPanel.main.title}</h2>
       </div>
       <div className="space-y-6">
         <Select
-          label="Your Device"
+          label={t.configPanel.main.deviceLabel}
           value={`${screenSize}${modelName.replaceAll(" ", "-").toLowerCase()}`}
           onChange={({ screenSize, label }) => {
             updateConfigurator({
@@ -41,7 +43,7 @@ export default function MainContentSection() {
           }))}
         />
         <Select
-          label="Choose a layout"
+          label={t.configPanel.main.layoutLabel}
           value={template}
           onChange={({ type }) =>
             updateConfigurator({

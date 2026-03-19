@@ -1,4 +1,5 @@
 import { inputClassName, labelClassName } from "../styles";
+import { useLanguage } from "@/context/LanguageContext";
 
 export function BooleanField({
   label,
@@ -103,6 +104,7 @@ export function VisionConfigEditor({
   value: unknown;
   onChange: (nextData: Record<string, unknown>) => void;
 }) {
+  const { t } = useLanguage();
   const visionData: Record<string, unknown> =
     typeof value === "object" && value !== null
       ? (value as Record<string, unknown>)
@@ -111,11 +113,13 @@ export function VisionConfigEditor({
   return (
     <div className="space-y-3">
       <div>
-        <label className={labelClassName}>Title</label>
+        <label className={labelClassName}>
+          {t.configPanel.vision.titleLabel}
+        </label>
         <input
           className={inputClassName}
           value={String(visionData.title ?? "")}
-          placeholder="My vision board"
+          placeholder={t.configPanel.vision.titlePlaceholder}
           onChange={(event) =>
             onChange({
               ...visionData,
@@ -126,11 +130,13 @@ export function VisionConfigEditor({
       </div>
 
       <div>
-        <label className={labelClassName}>Note</label>
+        <label className={labelClassName}>
+          {t.configPanel.vision.noteLabel}
+        </label>
         <textarea
           className={`${inputClassName} min-h-[90px] resize-y`}
           value={String(visionData.note ?? "")}
-          placeholder="Describe your focus"
+          placeholder={t.configPanel.vision.notePlaceholder}
           onChange={(event) =>
             onChange({
               ...visionData,

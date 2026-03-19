@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import ConfirmDialog from "@/components/common/ConfirmDialog";
+import { useLanguage } from "@/context/LanguageContext";
 import {
   selectResetConfig,
   useConfiguratorStore,
@@ -25,6 +26,7 @@ export default function ConfigPanel({
   const isAside = variant === "aside";
   const resetConfig = useConfiguratorStore(selectResetConfig);
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <aside
@@ -49,10 +51,10 @@ export default function ConfigPanel({
 
       <ConfirmDialog
         open={isConfirmOpen}
-        title="Reset current sub-product?"
-        description="This will revert only the currently selected sub-product without touching other widgets."
-        confirmLabel="Reset"
-        cancelLabel="Cancel"
+        title={t.configPanel.dialog.title}
+        description={t.configPanel.dialog.description}
+        confirmLabel={t.configPanel.dialog.confirm}
+        cancelLabel={t.configPanel.dialog.cancel}
         onCancel={() => setIsConfirmOpen(false)}
         onConfirm={() => {
           setIsConfirmOpen(false);

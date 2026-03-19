@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { ChevronDown, Palette } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 import {
   selectCommon,
   selectUpdateCommon,
@@ -13,6 +14,7 @@ import {
 import { ColorInput } from "./Fields";
 
 export default function AppearanceSection() {
+  const { t } = useLanguage();
   const common = useConfiguratorStore(selectCommon);
   const updateCommon = useConfiguratorStore(selectUpdateCommon);
   const [isOpen, setIsOpen] = useState(true);
@@ -36,7 +38,7 @@ export default function AppearanceSection() {
           <h2
             className={`${sectionTitleClassName} group-hover:text-text-main-light dark:group-hover:text-white transition-colors`}
           >
-            Appearance & Add-ons
+            {t.configPanel.appearance.title}
           </h2>
         </div>
         <ChevronDown
@@ -51,7 +53,7 @@ export default function AppearanceSection() {
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <h3 className="text-xs font-semibold text-text-muted-light dark:text-text-muted-dark tracking-wide uppercase">
-                Background
+                {t.configPanel.appearance.backgroundTitle}
               </h3>
               <div className="flex bg-gray-200 dark:bg-surface-dark p-1 rounded-lg border border-border-light dark:border-border-dark">
                 <button
@@ -63,7 +65,7 @@ export default function AppearanceSection() {
                       : "text-text-muted-light dark:text-text-muted-dark hover:text-text-main-light dark:hover:text-white"
                   }`}
                 >
-                  Color
+                  {t.configPanel.appearance.modeColor}
                 </button>
                 <button
                   type="button"
@@ -74,23 +76,25 @@ export default function AppearanceSection() {
                       : "text-text-muted-light dark:text-text-muted-dark hover:text-text-main-light dark:hover:text-white"
                   }`}
                 >
-                  Image
+                  {t.configPanel.appearance.modeImage}
                 </button>
               </div>
             </div>
 
             {backgroundMode === "color" ? (
               <ColorInput
-                label="Solid Color"
+                label={t.configPanel.appearance.solidColor}
                 value={common.backgroundColor ?? ""}
                 onChange={(value) => updateCommon({ backgroundColor: value })}
               />
             ) : (
               <div>
-                <label className={labelClassName}>Background image URL</label>
+                <label className={labelClassName}>
+                  {t.configPanel.appearance.backgroundImageUrl}
+                </label>
                 <input
                   className={inputClassName}
-                  placeholder="https://example.com/image.jpg"
+                  placeholder={t.configPanel.appearance.backgroundImagePlaceholder}
                   value={common.backgroundImage ?? ""}
                   onChange={(event) =>
                     updateCommon({
@@ -104,7 +108,7 @@ export default function AppearanceSection() {
 
           <div className="space-y-4">
             <h3 className="text-xs font-semibold text-text-muted-light dark:text-text-muted-dark tracking-wide uppercase mb-3">
-              Theme / Colors
+              {t.configPanel.appearance.themeTitle}
             </h3>
             <div className="space-y-4">
               <div className="grid grid-cols-3 gap-2 p-1 bg-gray-100 dark:bg-[#15171C] rounded-xl border border-border-light dark:border-border-dark">
@@ -125,7 +129,11 @@ export default function AppearanceSection() {
                           : "text-text-muted-light dark:text-text-muted-dark hover:bg-white dark:hover:bg-gray-800 hover:shadow-sm"
                       }`}
                     >
-                      {theme.charAt(0).toUpperCase() + theme.slice(1)}
+                      {theme === "auto"
+                        ? t.configPanel.appearance.themeAuto
+                        : theme === "light"
+                          ? t.configPanel.appearance.themeLight
+                          : t.configPanel.appearance.themeDark}
                     </button>
                   );
                 })}
@@ -133,19 +141,19 @@ export default function AppearanceSection() {
 
               <div className="grid grid-cols-2 gap-3">
                 <ColorInput
-                  label="Border"
+                  label={t.configPanel.appearance.border}
                   value={common.borderColor ?? ""}
                   onChange={(value) => updateCommon({ borderColor: value })}
                   variant="swatch"
                 />
                 <ColorInput
-                  label="Dock"
+                  label={t.configPanel.appearance.dock}
                   value={common.dockColor ?? ""}
                   onChange={(value) => updateCommon({ dockColor: value })}
                   variant="swatch"
                 />
                 <ColorInput
-                  label="Status Bar"
+                  label={t.configPanel.appearance.statusBar}
                   value={common.statusBar?.color ?? ""}
                   onChange={(value) =>
                     updateCommon({
@@ -158,7 +166,7 @@ export default function AppearanceSection() {
                   variant="swatch"
                 />
                 <ColorInput
-                  label="Island"
+                  label={t.configPanel.appearance.island}
                   value={common.islandBorderColor ?? ""}
                   onChange={(value) =>
                     updateCommon({ islandBorderColor: value })
@@ -166,13 +174,13 @@ export default function AppearanceSection() {
                   variant="swatch"
                 />
                 <ColorInput
-                  label="Left Widget"
+                  label={t.configPanel.appearance.leftWidget}
                   value={common.leftWidgetColor ?? ""}
                   onChange={(value) => updateCommon({ leftWidgetColor: value })}
                   variant="swatch"
                 />
                 <ColorInput
-                  label="Right Widget"
+                  label={t.configPanel.appearance.rightWidget}
                   value={common.rightWidgetColor ?? ""}
                   onChange={(value) =>
                     updateCommon({ rightWidgetColor: value })

@@ -11,11 +11,13 @@ import {
   sectionTitleClassName,
 } from "../styles";
 import { BooleanField, VisionConfigEditor } from "./Fields";
+import { useLanguage } from "@/context/LanguageContext";
 import { SUB_PRODUCT_TYPE } from "@/utils/constants";
 import { OptionsConfig } from "@/types/config";
 import { toDateInputValue } from "@/utils/helper";
 
 export default function DisplayOptionsSection() {
+  const { t } = useLanguage();
   const template = useConfiguratorStore(selectTemplate);
   const options = useConfiguratorStore(selectOptions);
 
@@ -29,14 +31,16 @@ export default function DisplayOptionsSection() {
     <section>
       <div className="flex items-center gap-2 mb-6">
         <Boxes className="h-4 w-4 text-primary" />
-        <h2 className={sectionTitleClassName}>Display Options</h2>
+        <h2 className={sectionTitleClassName}>
+          {t.configPanel.displayOptions.title}
+        </h2>
       </div>
 
       <div className="space-y-6">
         {template === SUB_PRODUCT_TYPE.MONTH && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <BooleanField
-              label="Start week on Monday"
+              label={t.configPanel.displayOptions.startWeekOnMonday}
               checked={options.startWeekOnMonday}
               onChange={(checked) =>
                 updateWidget({
@@ -45,7 +49,7 @@ export default function DisplayOptionsSection() {
               }
             />
             <BooleanField
-              label="Show day name"
+              label={t.configPanel.displayOptions.showDayName}
               checked={options.showDayName}
               onChange={(checked) =>
                 updateWidget({
@@ -54,7 +58,7 @@ export default function DisplayOptionsSection() {
               }
             />
             <BooleanField
-              label="Show dot"
+              label={t.configPanel.displayOptions.showDot}
               checked={options.showDot}
               onChange={(checked) =>
                 updateWidget({
@@ -63,7 +67,7 @@ export default function DisplayOptionsSection() {
               }
             />
             <BooleanField
-              label="Show other month days"
+              label={t.configPanel.displayOptions.showOtherMonthDays}
               checked={options.showOtherMonthDays}
               onChange={(checked) =>
                 updateWidget({
@@ -72,7 +76,7 @@ export default function DisplayOptionsSection() {
               }
             />
             <BooleanField
-              label="Show moon phase"
+              label={t.configPanel.displayOptions.showMoonPhase}
               checked={options.showMoonPhase}
               onChange={(checked) =>
                 updateWidget({
@@ -86,14 +90,14 @@ export default function DisplayOptionsSection() {
 
         {template === SUB_PRODUCT_TYPE.QUARTER && (
           <p className="text-sm text-text-muted-light dark:text-text-muted-dark">
-            Quarter currently has no extra schema fields (`data: undefined`).
+            {t.configPanel.displayOptions.quarterNoExtra}
           </p>
         )}
 
         {template === SUB_PRODUCT_TYPE.YEAR && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <BooleanField
-              label="Start week on Monday"
+              label={t.configPanel.displayOptions.startWeekOnMonday}
               checked={options.startWeekOnMonday}
               onChange={(checked) =>
                 updateWidget({
@@ -102,7 +106,7 @@ export default function DisplayOptionsSection() {
               }
             />
             <BooleanField
-              label="Show day name"
+              label={t.configPanel.displayOptions.showDayName}
               checked={options.showDayName}
               onChange={(checked) =>
                 updateWidget({
@@ -116,7 +120,9 @@ export default function DisplayOptionsSection() {
         {template === SUB_PRODUCT_TYPE.LIFE_TIME && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className={labelClassName}>Birth date</label>
+              <label className={labelClassName}>
+                {t.configPanel.displayOptions.birthDate}
+              </label>
               <input
                 type="date"
                 className={inputClassName}
@@ -131,7 +137,9 @@ export default function DisplayOptionsSection() {
               />
             </div>
             <div>
-              <label className={labelClassName}>Life expectancy (years)</label>
+              <label className={labelClassName}>
+                {t.configPanel.displayOptions.lifeExpectancyYears}
+              </label>
               <input
                 type="number"
                 min="1"
