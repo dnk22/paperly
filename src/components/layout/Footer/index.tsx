@@ -28,7 +28,7 @@ export default function Footer() {
 
           {/* Cột 2: Product */}
           <div className="flex flex-col gap-4">
-            <h4 className="font-bold text-white text-sm">
+            {/* <h4 className="font-bold text-white text-sm">
               {t.footer.product.title}
             </h4>
             <ul className="flex flex-col gap-2 text-sm text-neutral-500">
@@ -64,7 +64,7 @@ export default function Footer() {
                   Mantra Focus
                 </Link>
               </li>
-            </ul>
+            </ul> */}
           </div>
 
           {/* Cột 3: Resources */}
